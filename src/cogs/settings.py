@@ -84,6 +84,9 @@ class Settings(commands.Cog):
         settingsview.add_item(
             SettingButton("Event channel", "eventchannel", ctx.guild.text_channels)
         )
+        settingsview.add_item(
+            SettingButton("Voice channel category", "voicecategory", ctx.guild.categories)
+        )
 
         await ctx.response.send_message(
             view=settingsview, ephemeral=True

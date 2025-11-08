@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3.9-alpine
 
 RUN mkdir -p /app/data
 RUN mkdir -p /app/src
