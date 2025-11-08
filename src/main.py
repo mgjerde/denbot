@@ -8,7 +8,6 @@ import sys
 
 logger = logging.getLogger("discord")
 logger.setLevel(logging.INFO)
-# handler = logging.FileHandler(filename='/app/data/discord.log', encoding='utf-8', mode='w')
 handler = logging.StreamHandler(sys.stdout)
 handler.setFormatter(
     logging.Formatter("%(asctime)s:%(levelname)s:%(name)s: %(message)s")
@@ -18,15 +17,17 @@ logger.addHandler(handler)
 DEBUG_GUILDS = os.environ.get("DEBUG_GUILDS")
 DISCORD_TOKEN = os.environ.get("DISCORD_TOKEN")
 
-denbot = commands.Bot(intents=discord.Intents.all())  #  debug_guilds=[DEBUG_GUILDS]
+denbot = commands.Bot(intents=discord.Intents.all())
 
 enabled = [
     "settings",
     "autochannel",
     "converter",
     "onjoin",
-    "eventlistener"
-]  #  "lfg" "currentlystreaming"
+    "eventlistener",
+    "currentlystreaming",
+    ]
+
 db = database.DB
 db.create_database()
 with os.scandir("cogs") as fileList:
@@ -40,13 +41,5 @@ with os.scandir("cogs") as fileList:
 @denbot.event
 async def on_ready():
     logger.info(f"{denbot.user} has successfully connected! (ID: {denbot.user.id})")
-    # for guild in denbot.guilds:
-    #     database.add_guild(guild.id)
-
-
-# @denbot.event
-# async def on_guild_join(guild):
-#     database.add_guild(guild.id)
-
 
 denbot.run(DISCORD_TOKEN)

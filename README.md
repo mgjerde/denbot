@@ -1,2 +1,2 @@
 # Denbot
-test 2
+Bot for the Den
